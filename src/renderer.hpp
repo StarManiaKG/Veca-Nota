@@ -14,19 +14,17 @@
 // GNU General Public License or 'LICENSE' file for more details.
 //
 //-----------------------------------------------------------------------------
-/// \file  main.cpp
-/// \brief Main source file
+/// \file  renderer.hpp
+/// \brief Renderer headers
 
-#include "renderer.hpp"
-#include "string.hpp"
+#include <SDL/SDL.h>
+#include "SDL_video.h"
 
-int main(void)
+class Renderer
 {
-	if (Renderer::CreateWindow())
-		return 1;
+	public:
+		SDL_Window *window;
+		SDL_Renderer *rendering;
 
-	String::Printf("Hello World! %s\n", "This is STAR Speaking!");
-
-	SDL_Quit();
-	return 0;
-}
+		static int CreateWindow();
+};
