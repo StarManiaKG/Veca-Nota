@@ -23,10 +23,8 @@
 
 #include "string.hpp"
 
-using namespace VecaNota;
-
 #if 0
-void strrand(char *s, const int len)
+void VecaNota::String::strrand(char *s, const int len)
 {
 	static const char alphanum[] =
 		"0123456789"
@@ -41,10 +39,10 @@ void strrand(char *s, const int len)
 #endif
 
 //
-// void String::Printf(const char *str, ...)
+// void VecaNota::String::Printf(const char *str, ...)
 // Prints the specified strings into the console.
 //
-void String::Printf(const char *str, ...)
+void VecaNota::String::Printf(const char *str, ...)
 {
 	va_list arglist;
 	static char *txt = NULL;

@@ -20,7 +20,7 @@
 #ifndef __renderer_hpp__
 #define __renderer_hpp__
 
-//#pragma once
+#pragma once
 
 #include <SDL.h>
 #include "SDL_video.h"
@@ -31,11 +31,14 @@ namespace VecaNota
 	class Renderer
 	{
 	public:
-		static int CreateWindow();
+		SDL_Window *Window;
+		SDL_Renderer *Rendering;
+
+		int CreateWindow();
+
+	private:
+		int icoSurface;
 	};
 };
-
-extern SDL_Window *Window;
-extern SDL_Renderer *Rendering;
 
 #endif // __renderer_hpp__

@@ -22,49 +22,47 @@
 #include "renderer.hpp"
 #include "string.hpp"
 
-SDL_Window *Window = NULL;
-SDL_Renderer *Rendering = NULL;
-
 using namespace VecaNota;
 
 int Renderer::CreateWindow(void)
 {
-	int flags = SDL_RENDERER_SOFTWARE|SDL_WINDOW_MINIMIZED;
+	VecaNota::Renderer VN_SDL_Renderer;
+	VecaNota::String VN_StringLib;
+
+	int flags = SDL_RENDERER_SOFTWARE;
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
-		String::Printf("SDL_Init Error: %s\n", SDL_GetError());
+		VN_StringLib.Printf("SDL_Init Error: %s\n", SDL_GetError());
 		return 1;
 	}
 
 	// Create a window
-	Window = SDL_CreateWindow("Veca-Nova",
+	VN_SDL_Renderer.Window = SDL_CreateWindow("Veca-Nova",
 							SDL_WINDOWPOS_CENTERED,
 							SDL_WINDOWPOS_CENTERED,
 							320, 200, flags);
 
-	if (Window == NULL)
+	if (VN_SDL_Renderer.Window == NULL)
 	{
-		String::Printf("Couldn't create window: %s\n", SDL_GetError());
+		VN_StringLib.Printf("Couldn't create window: %s\n", SDL_GetError());
 		return 1;
 	}
 
 #if 0
 	// Set a Window Icon	
-	if (Window && icoSurface)
-		SDL_SetWindowIcon(window, icoSurface);
+	if (VN_SDL_Renderer.Window && VN_SDL_Renderer.icoSurface)
+		SDL_SetWindowIcon(window, VN_SDL_Renderer.icoSurface);
 #endif
 
 	// Set a Renderer
-	Rendering = SDL_CreateRenderer(Window,
-							-1, SDL_RENDERER_SOFTWARE);
-
-	if (Rendering == NULL)
+	VN_SDL_Renderer.Rendering = SDL_CreateRenderer(VN_SDL_Renderer.Window, -1, SDL_RENDERER_SOFTWARE);
+	if (VN_SDL_Renderer.Rendering == NULL)
 	{
-		String::Printf("Couldn't create rendering context: %s\n", SDL_GetError());
+		VN_StringLib.Printf("Couldn't create rendering context: %s\n", SDL_GetError());
 		return 1;
 	}
-	SDL_RenderSetLogicalSize(Rendering, 320, 200);
 
+	SDL_RenderSetLogicalSize(VN_SDL_Renderer.Rendering, 320, 200);
 	return 0;
 }

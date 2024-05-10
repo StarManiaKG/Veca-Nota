@@ -20,18 +20,19 @@
 #include "renderer.hpp"
 #include "string.hpp"
 
-using namespace VecaNota;
-
 #ifdef _WIN32
 int WinMain()
 #else
 int main()
 #endif
 {
-	if (Renderer::CreateWindow())
+	VecaNota::Renderer VN_SDL_Renderer;
+	VecaNota::String VN_StringLib;
+
+	if (VN_SDL_Renderer.CreateWindow())
 		return 1;
 
-	String::Printf("Hello World! %s\n", "This is STAR Speaking!");
+	VN_StringLib.Printf("Hello World! %s\n", "This is STAR Speaking!");
 
 	SDL_Quit();
 	return 0;

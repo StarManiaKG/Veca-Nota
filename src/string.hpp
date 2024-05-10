@@ -27,7 +27,7 @@ namespace VecaNota
 	class String
 	{
 	public:
-		static void Printf(const char *str, ...);
+		void Printf(const char *str, ...);
 	};
 };
 
