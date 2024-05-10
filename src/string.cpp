@@ -17,12 +17,13 @@
 /// \file  string.cpp
 /// \brief String handlers
 
-#include <time.h>
-#include <malloc.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <malloc.h>
 
 #include "string.hpp"
+
+using namespace VecaNota;
 
 #if 0
 void strrand(char *s, const int len)
@@ -43,7 +44,7 @@ void strrand(char *s, const int len)
 // void String::Printf(const char *str, ...)
 // Prints the specified strings into the console.
 //
-void String::Printf(const char *str ...)
+void String::Printf(const char *str, ...)
 {
 	va_list arglist;
 	static char *txt = NULL;
@@ -57,4 +58,4 @@ void String::Printf(const char *str ...)
 
 	printf(txt);
 	free(txt);
-}
+};

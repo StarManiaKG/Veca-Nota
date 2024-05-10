@@ -22,38 +22,49 @@
 #include "renderer.hpp"
 #include "string.hpp"
 
+SDL_Window *Window = NULL;
+SDL_Renderer *Rendering = NULL;
+
+using namespace VecaNota;
+
 int Renderer::CreateWindow(void)
 {
-	if ((SDL_Init(SDL_INIT_VIDEO) != 0) || (SDL_Init(SDL_INIT_EVERYTHING) != 0))
+	int flags = SDL_RENDERER_SOFTWARE|SDL_WINDOW_MINIMIZED;
+
+	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
 	{
 		String::Printf("SDL_Init Error: %s\n", SDL_GetError());
 		return 1;
 	}
 
-	// Create a window //
-	Renderer::window = SDL_CreateWindow("Veca-Nova", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-			320, 200, SDL_RENDERER_SOFTWARE);
+	// Create a window
+	Window = SDL_CreateWindow("Veca-Nova",
+							SDL_WINDOWPOS_CENTERED,
+							SDL_WINDOWPOS_CENTERED,
+							320, 200, flags);
 
-	if (Renderer::window == NULL)
+	if (Window == NULL)
 	{
 		String::Printf("Couldn't create window: %s\n", SDL_GetError());
-		return SDL_FALSE;
+		return 1;
 	}
 
 #if 0
-	// Set a Window Icon //	
-	if (Renderer::window && icoSurface)
+	// Set a Window Icon	
+	if (Window && icoSurface)
 		SDL_SetWindowIcon(window, icoSurface);
 #endif
 
-	// Set a Renderer //
-	Renderer::rendering = SDL_CreateRenderer(Renderer::window, -1, SDL_RENDERER_SOFTWARE);
-	if (Renderer::rendering == NULL)
+	// Set a Renderer
+	Rendering = SDL_CreateRenderer(Window,
+							-1, SDL_RENDERER_SOFTWARE);
+
+	if (Rendering == NULL)
 	{
 		String::Printf("Couldn't create rendering context: %s\n", SDL_GetError());
 		return 1;
 	}
-	SDL_RenderSetLogicalSize(Renderer::rendering, 320, 200);
+	SDL_RenderSetLogicalSize(Rendering, 320, 200);
 
 	return 0;
 }

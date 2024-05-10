@@ -17,8 +17,18 @@
 /// \file  string.hpp
 /// \brief String headers
 
-class String
+#ifndef __string_hpp__
+#define __string_hpp__
+
+#pragma once
+
+namespace VecaNota
 {
+	class String
+	{
 	public:
 		static void Printf(const char *str, ...);
+	};
 };
+
+#endif // __string_hpp__

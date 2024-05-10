@@ -20,7 +20,13 @@
 #include "renderer.hpp"
 #include "string.hpp"
 
-int main(void)
+using namespace VecaNota;
+
+#ifdef _WIN32
+int WinMain()
+#else
+int main()
+#endif
 {
 	if (Renderer::CreateWindow())
 		return 1;

@@ -17,14 +17,25 @@
 /// \file  renderer.hpp
 /// \brief Renderer headers
 
-#include <SDL/SDL.h>
+#ifndef __renderer_hpp__
+#define __renderer_hpp__
+
+//#pragma once
+
+#include <SDL.h>
 #include "SDL_video.h"
+#include "SDL_render.h"
 
-class Renderer
+namespace VecaNota
 {
+	class Renderer
+	{
 	public:
-		SDL_Window *window;
-		SDL_Renderer *rendering;
-
 		static int CreateWindow();
+	};
 };
+
+extern SDL_Window *Window;
+extern SDL_Renderer *Rendering;
+
+#endif // __renderer_hpp__
