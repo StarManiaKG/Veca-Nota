@@ -56,4 +56,5 @@ void VecaNota::String::Printf(const char *str, ...)
 
 	printf(txt);
 	free(txt);
+	txt = NULL;
 };

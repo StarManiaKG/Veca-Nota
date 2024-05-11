@@ -24,14 +24,16 @@
 
 using namespace VecaNota;
 
-int Renderer::CreateWindow(void)
+//
+// int Renderer::CreateWindow(int initflags, int windowflags, int rendererflags)
+// Creates a new screen window, based on the given 'initflags', 'windowflags', and 'rendererflags'.
+//
+int Renderer::CreateWindow(int initflags, int windowflags, int rendererflags)
 {
 	VecaNota::Renderer VN_SDL_Renderer;
 	VecaNota::String VN_StringLib;
 
-	int flags = SDL_RENDERER_SOFTWARE;
-
-	if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+	if (SDL_Init(initflags) != 0)
 	{
 		VN_StringLib.Printf("SDL_Init Error: %s\n", SDL_GetError());
 		return 1;
@@ -41,7 +43,7 @@ int Renderer::CreateWindow(void)
 	VN_SDL_Renderer.Window = SDL_CreateWindow("Veca-Nova",
 							SDL_WINDOWPOS_CENTERED,
 							SDL_WINDOWPOS_CENTERED,
-							320, 200, flags);
+							320, 200, windowflags);
 
 	if (VN_SDL_Renderer.Window == NULL)
 	{
@@ -56,7 +58,7 @@ int Renderer::CreateWindow(void)
 #endif
 
 	// Set a Renderer
-	VN_SDL_Renderer.Rendering = SDL_CreateRenderer(VN_SDL_Renderer.Window, -1, SDL_RENDERER_SOFTWARE);
+	VN_SDL_Renderer.Rendering = SDL_CreateRenderer(VN_SDL_Renderer.Window, -1, rendererflags);
 	if (VN_SDL_Renderer.Rendering == NULL)
 	{
 		VN_StringLib.Printf("Couldn't create rendering context: %s\n", SDL_GetError());
