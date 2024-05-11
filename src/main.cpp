@@ -33,7 +33,7 @@ int main()
 	VecaNota::Renderer VN_SDL_Renderer;
 	VecaNota::String VN_StringLib;
 
-	if (VN_SDL_Renderer.CreateWindow(SDL_INIT_VIDEO|SDL_WINDOW_RESIZABLE, SDL_RENDERER_SOFTWARE, SDL_RENDERER_SOFTWARE))
+	if (VN_SDL_Renderer.CreateWindow(SDL_INIT_VIDEO, SDL_RENDERER_SOFTWARE, SDL_RENDERER_SOFTWARE))
 		return 1;
 
 	while (true)
