@@ -33,9 +33,9 @@ namespace VecaNota
 	public:
 		SDL_Window *Window;
 		SDL_Renderer *Rendering;
-		SDL_WindowEvent Events;
+		SDL_Event Events;
 
-		int CreateWindow(int initflags, int windowflags, int rendererflags);
+		int CreateWindow(int initflags, int windowflags);
 
 	private:
 		int icoSurface;

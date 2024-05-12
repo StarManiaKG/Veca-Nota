@@ -20,34 +20,81 @@
 #include "renderer.hpp"
 #include "string.hpp"
 
+#ifdef _WIN32
+//#include <windows.h>
+#if !defined (main)
+//#define SDLMAIN
+#endif
+#endif
+
+#ifdef SDLMAIN
+#include "SDL_main.h"
+#elif defined(FORCESDLMAIN)
+extern int SDL_main(int argc, char *argv[]);
+#endif
+
 //
-// int main()
+// int SDL_main(int argc, char **argv)
+// int main(int argc, char **argv)
+//
 // Extremely self-explanitory.
 //
-#ifdef _WIN32
-int WinMain()
+#ifdef FORCESDLMAIN
+int SDL_main(int argc, char **argv)
 #else
-int main()
+#ifdef _WIN32
+int WinMain(int argc, char **argv)
+#else
+int main(int argc, char **argv)
+#endif
 #endif
 {
+	int exit = false;
+
 	VecaNota::Renderer VN_SDL_Renderer;
 	VecaNota::String VN_StringLib;
 
-	if (VN_SDL_Renderer.CreateWindow(SDL_INIT_VIDEO, SDL_RENDERER_SOFTWARE, SDL_RENDERER_SOFTWARE))
+	if (VN_SDL_Renderer.CreateWindow(SDL_INIT_VIDEO, SDL_RENDERER_SOFTWARE))
 		return 1;
 
+	//for (;;)
 	while (true)
 	{
 		VN_StringLib.Printf("Hello World! %s\n", "This is STAR Speaking!");
 
-		if (VN_SDL_Renderer.Events.type & (SDL_QUIT|SDL_APP_TERMINATING)
-			|| (VN_SDL_Renderer.Events.event & SDL_WINDOWEVENT_CLOSE))
+		while (SDL_PollEvent(&VN_SDL_Renderer.Events))
+		{
+			switch (VN_SDL_Renderer.Events.type)
+			{
+#if 0
+				case SDL_WINDOWEVENT:
+				{
+					if (VN_SDL_Renderer.Events.window.event & SDL_WINDOWEVENT_CLOSE)
+					{
+						exit = true;
+						break;
+					}
+				}
+#endif
+
+				case SDL_QUIT:
+				case SDL_APP_TERMINATING:
+					exit = true;
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		if (exit)
 		{
 			SDL_DestroyWindow(VN_SDL_Renderer.Window);
+			SDL_Quit();
+
 			break;
 		}
 	}
 
-	SDL_Quit();
 	return 0;
 }

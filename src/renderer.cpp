@@ -25,10 +25,10 @@
 using namespace VecaNota;
 
 //
-// int Renderer::CreateWindow(int initflags, int windowflags, int rendererflags)
+// int Renderer::CreateWindow(int initflags, int windowflags)
 // Creates a new screen window, based on the given 'initflags', 'windowflags', and 'rendererflags'.
 //
-int Renderer::CreateWindow(int initflags, int windowflags, int rendererflags)
+int Renderer::CreateWindow(int initflags, int windowflags)
 {
 	VecaNota::Renderer VN_SDL_Renderer;
 	VecaNota::String VN_StringLib;
@@ -58,7 +58,7 @@ int Renderer::CreateWindow(int initflags, int windowflags, int rendererflags)
 #endif
 
 	// Set a Renderer
-	VN_SDL_Renderer.Rendering = SDL_CreateRenderer(VN_SDL_Renderer.Window, -1, rendererflags);
+	VN_SDL_Renderer.Rendering = SDL_CreateRenderer(VN_SDL_Renderer.Window, -1, windowflags);
 	if (VN_SDL_Renderer.Rendering == NULL)
 	{
 		VN_StringLib.Printf("Couldn't create rendering context: %s\n", SDL_GetError());
